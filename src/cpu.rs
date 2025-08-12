@@ -9,6 +9,14 @@ pub struct CPURegs {
     l: u8,
 }
 
+// TODO: implement std::convert trait to/from u8
+pub struct FlagRegister {
+    zero: bool,
+    subtract: bool,
+    half_carry: bool,
+    carry: bool,
+}
+
 impl CPURegs {
     fn readAF(&self) -> u16 {
         (self.a as u16) << 8 | self.f as u16
