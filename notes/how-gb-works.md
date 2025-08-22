@@ -47,6 +47,13 @@ However, there are optimizations we can begin to think about for this method.
 For reused code paths (loops), we can store information about the decoded
 instructions rather than decoding every instructions from scratch every time.
 
+The fetch-decode-execute loop is essentially identical to that of the ARM
+simulator from Computer Architecture (CMSC 22200). Fetch just grabs the
+next instruction. Decode grabs the opcode at the PC, uses a `switch` statement
+on that opcode, and dispatch to the appropriate execution function. Read the
+CPU and opcodes documentation to see if there are hierarchical groupings like
+in the ARM instruction set from the simulator project.
+
 
 # How does the GameBoy system architecture work?
 
