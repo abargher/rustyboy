@@ -9,6 +9,7 @@ pub struct CPURegs {
     l: u8,
 }
 
+#[derive(Debug, Copy, Clone)]
 pub struct FlagRegister {
     zero: bool,
     subtract: bool,
@@ -48,7 +49,7 @@ impl std::convert::From<u8> for FlagRegister {
 
 impl CPURegs {
     fn readAF(&self) -> u16 {
-        (self.a as u16) << 8 | self.f as u16
+        (self.a as u16) << 8 | u8::from(self.f) as u16
     }
     fn readBC(&self) -> u16 {
         (self.b as u16) << 8 | self.c as u16
