@@ -1,3 +1,5 @@
+use crate::instruction;
+
 pub struct CPURegs {
     a: u8,
     f: FlagRegister,
@@ -48,32 +50,33 @@ impl std::convert::From<u8> for FlagRegister {
 }
 
 impl CPURegs {
-    fn readAF(&self) -> u16 {
+    fn read_af(&self) -> u16 {
         (self.a as u16) << 8 | u8::from(self.f) as u16
     }
-    fn readBC(&self) -> u16 {
+
+    fn read_bc(&self) -> u16 {
         (self.b as u16) << 8 | self.c as u16
     }
-    fn readDE(&self) -> u16 {
+    fn read_de(&self) -> u16 {
         (self.d as u16) << 8 | self.e as u16
     }
-    fn readHL(&self) -> u16 {
+    fn read_hl(&self) -> u16 {
         (self.h as u16) << 8 | self.l as u16
     }
 
-    fn writeAF(&mut self, value: u16) {
+    fn write_af(&mut self, value: u16) {
         self.a = ((value & 0xFF00) >> 8) as u8;
         self.f = FlagRegister::from((value & 0x00FF) as u8);
     }
-    fn writeBC(&mut self, value: u16) {
+    fn write_bc(&mut self, value: u16) {
         self.b = ((value & 0xFF00) >> 8) as u8;
         self.c = (value & 0x00FF) as u8;
     }
-    fn writeDE(&mut self, value: u16) {
+    fn write_de(&mut self, value: u16) {
         self.d = ((value & 0xFF00) >> 8) as u8;
         self.e = (value & 0x00FF) as u8;
     }
-    fn writeHL(&mut self, value: u16) {
+    fn write_hl(&mut self, value: u16) {
         self.h = ((value & 0xFF00) >> 8) as u8;
         self.l = (value & 0x00FF) as u8;
     }

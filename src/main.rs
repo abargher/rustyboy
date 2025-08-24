@@ -1,4 +1,5 @@
 pub mod cpu;
+pub mod instruction;
 
 fn main() {
     println!("Hello, world!");
